@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prometheus-deployment
+  labels:
+    app: prometheus
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+       app: prometheus
+  template:
+    metadata:
+      name: prometheus-deploy
+      labels:
+        app: prometheus
+    spec:
+      volumes:
+        - name: prom-pv
+          persistentVolumeClaim:
+            claimName: prom-pvc
+      containers:
+        - name: prometheus
+          image: bhavanimeesala/prometheus:v1
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - mountPath: "/metrics"
+              name: prom-pv
+      restartPolicy: Always
