@@ -21,7 +21,7 @@ spec:
             claimName: prom-pvc
       containers:
         - name: prometheus
-          image: bhavanimeesala/prometheus:v1
+          image: bhavanimeesala/prometheus:v3
           imagePullPolicy: IfNotPresent
           volumeMounts:
             - mountPath: "/metrics"
